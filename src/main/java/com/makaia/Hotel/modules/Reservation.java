@@ -28,13 +28,7 @@ public class Reservation implements Serializable {
     @JsonIgnoreProperties("reservations")
     private Room room;
 
-    public Reservation(Integer reserveCode, LocalDate reserveDate, Double totalValue, Customer customer, Room room) {
-        this.reserveCode = reserveCode;
-        this.reserveDate = reserveDate;
-        this.totalValue = totalValue;
-        this.customer = customer;
-        this.room = room;
-    }
+
     private String generarCodigoReserva() {
         return UUID.randomUUID().toString();
     }

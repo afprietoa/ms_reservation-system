@@ -25,7 +25,7 @@ public class CustomerService {
             }
         }
 
-        if(customer.getFirstName() != null && customer.getLastName() != null ){
+        if(customer.getFirstName() != null && customer.getLastName() != null && customer.getDni() instanceof Integer){
             return new ResponseEntity<>(this.customerRepository.save(customer), HttpStatus.CREATED);
         }   else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI, FirstName and LastName are required.");

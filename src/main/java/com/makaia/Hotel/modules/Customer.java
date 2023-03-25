@@ -11,7 +11,6 @@ import java.util.List;
 public class Customer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dni;
     @Column(name = "firstName", length = 50)
     private String firstName;
@@ -28,14 +27,6 @@ public class Customer implements Serializable {
     @JsonIgnoreProperties("customer")
     private List<Reservation> reservations;
 
-    public Customer(Integer dni, String firstName, String lastName, String address, Integer age, String email) {
-        this.dni = dni;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.age = age;
-        this.email = email;
-    }
 
     public Integer getDni() {
         return dni;
