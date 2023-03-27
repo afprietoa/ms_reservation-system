@@ -14,9 +14,13 @@ import java.util.Optional;
 
 @Service
 public class CustomerService {
-    @Autowired
+
     private CustomerRepository customerRepository;
-    public ResponseEntity<Customer> create(Customer customer){
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+/*    public ResponseEntity<Customer> create(Customer customer){
         //Exceptions
         if(customer.getDni() != null ){
             Optional<Customer> tempCustomer = this.customerRepository.findById(customer.getDni());
@@ -27,6 +31,23 @@ public class CustomerService {
 
         if(customer.getFirstName() != null && customer.getLastName() != null && customer.getDni() instanceof Integer){
             return new ResponseEntity<>(this.customerRepository.save(customer), HttpStatus.CREATED);
+        }   else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI, FirstName and LastName are required.");
+        }
+    }*/
+
+    public Customer create(Customer customer){
+        //Exceptions
+        if(customer.getDni() != null ){
+            Optional<Customer> tempCustomer = this.customerRepository.findById(customer.getDni());
+            if(tempCustomer.isPresent()){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI is rejected in Database.");
+            }
+        }
+
+        if(customer.getFirstName() != null && customer.getLastName() != null && customer.getDni() instanceof Integer){
+            this.customerRepository.save(customer);
+            return customer;
         }   else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI, FirstName and LastName are required.");
         }

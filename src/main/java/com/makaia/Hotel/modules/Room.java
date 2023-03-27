@@ -22,7 +22,11 @@ public class Room implements Serializable {
     @JsonIgnoreProperties("room")
     private List<Reservation> reservations;
 
-
+    public Room(Integer numberRoom, String roomType, Double price) {
+        this.numberRoom = numberRoom;
+        this.roomType = roomType;
+        this.price = price;
+    }
 
     public Integer getNumberRoom() {
         return numberRoom;

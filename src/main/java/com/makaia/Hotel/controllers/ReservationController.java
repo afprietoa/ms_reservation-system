@@ -6,6 +6,7 @@ import com.makaia.Hotel.modules.Room;
 import com.makaia.Hotel.services.CustomerService;
 import com.makaia.Hotel.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,14 @@ import java.util.List;
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
-    @PostMapping("/reservation/{id}")
+/*    @PostMapping("/reservation/{id}")
     public ResponseEntity<Reservation> register(@RequestBody Reservation reservation, @PathVariable("id") int id){
+        return reservationService.create(reservation, id);
+    }*/
+
+    @PostMapping("/reservation/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Reservation register(@RequestBody Reservation reservation, @PathVariable("id") int id){
         return reservationService.create(reservation, id);
     }
     @GetMapping("/byType/reservationDate/{date}/reservationType/{type}")
