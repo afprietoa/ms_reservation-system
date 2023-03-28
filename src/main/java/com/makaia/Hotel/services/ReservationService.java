@@ -116,7 +116,7 @@ public class ReservationService {
 
         LocalDate nowDate = LocalDate.now();
         if(reservation.getReserveDate().isAfter(nowDate) &&
-                customerList.contains(customer) &&
+                customerList.contains(customer.get()) &&
                 reservation.getRoom() != null){
             this.reservationRepository.save(reservation);
             return reservation;

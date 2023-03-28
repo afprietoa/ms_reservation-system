@@ -25,7 +25,7 @@ public class CustomServieTest {
         Customer customer = new Customer(1, "Pepito", "Peréz", "Calle falsa 123", 18, "peto@example.com");
         Customer custom = customerService.create(customer);
 
-        assertTrue((customer.getFirstName() != null && customer.getLastName() != null && customer.getDni() instanceof Integer));
+        assertTrue((custom.getFirstName() != null && custom.getLastName() != null && custom.getDni() instanceof Integer));
     }
 
 
