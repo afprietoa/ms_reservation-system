@@ -1,14 +1,13 @@
 package com.makaia.Hotel.services;
 
+import com.makaia.Hotel.exceptions.HandlerResponseException;
 import com.makaia.Hotel.modules.Customer;
 import com.makaia.Hotel.modules.Reservation;
 import com.makaia.Hotel.modules.Room;
 import com.makaia.Hotel.repositories.CustomerRepository;
 import com.makaia.Hotel.repositories.ReservationRepository;
 import com.makaia.Hotel.repositories.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -36,7 +35,7 @@ public class ReservationService {
     public List<Reservation> research(){
         List<Reservation> reservationsAvailables = (List<Reservation>) reservationRepository.findAll();
         if(reservationsAvailables.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There are Rooms available now.");
+            throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"There aren't Rooms available now.");
         }
         return reservationsAvailables;
     }
@@ -83,26 +82,6 @@ public class ReservationService {
         return roomList;
     }
 
-/*    public ResponseEntity<Reservation> create(Reservation reservation, int idCustomer){
-        Optional<Customer> customer = this.customerService.researchById(idCustomer);
-        List<Customer> customerList = this.customerService.researchAll();
-        if(reservation.getReserveCode() != null ){
-            Optional<Reservation> tempReservation = this.reservationRepository.findById(reservation.getReserveCode());
-            if(tempReservation.isPresent()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room is rejected in Database.");
-            }
-        }
-
-        LocalDate nowDate = LocalDate.now();
-        if(reservation.getReserveDate().isAfter(nowDate) &&
-                reservation.getReserveDate() != null &&
-                customerList.contains(customer) &&
-                reservation.getRoom() != null){
-            return new ResponseEntity<>(this.reservationRepository.save(reservation), HttpStatus.CREATED);
-        }   else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI, FirstName and LastName are required.");
-        }
-    }*/
 
     public Reservation create(Reservation reservation, int idCustomer){
         Optional<Customer> customer = this.customerRepository.findById(idCustomer);
@@ -110,7 +89,7 @@ public class ReservationService {
         if(reservation.getReserveCode() != null ){
             Optional<Reservation> tempReservation = this.reservationRepository.findById(reservation.getReserveCode());
             if(tempReservation.isPresent()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room is rejected in Database.");
+                throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"Reservation isn't available.");
             }
         }
 
@@ -121,7 +100,7 @@ public class ReservationService {
             this.reservationRepository.save(reservation);
             return reservation;
         }   else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "DNI, FirstName and LastName are required.");
+            throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"Reservation isn't available for " + nowDate);
         }
     }
 }

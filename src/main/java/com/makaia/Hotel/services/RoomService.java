@@ -1,13 +1,11 @@
 package com.makaia.Hotel.services;
 
 
+import com.makaia.Hotel.exceptions.HandlerResponseException;
 import com.makaia.Hotel.modules.Room;
 import com.makaia.Hotel.repositories.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class RoomService {
         List<Room> roomsAvailables = (List<Room>) roomRepository.findAll();
         if(roomsAvailables.isEmpty()){
 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There are Rooms available now.");
+            throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"There aren't Rooms available now.");
         }
         return roomsAvailables;
     }
@@ -35,26 +33,16 @@ public class RoomService {
         Optional<Room> roomsAvailables = roomRepository.findById(id);
         if(roomsAvailables.isEmpty()){
 
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The room: " + id + " don't is available.");
+            throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"The room " + id + " is doesn't available.");
         }
         return roomsAvailables;
     }
-
-/*    public ResponseEntity<Room> create(Room room){
-        if(room.getNumberRoom() != null ){
-            Optional<Room> tempRoom = this.roomRepository.findById(room.getNumberRoom());
-            if(tempRoom.isPresent()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room is rejected in Database.");
-            }
-        }
-        return new ResponseEntity<>(this.roomRepository.save(room), HttpStatus.CREATED);
-    }*/
 
     public Room create(Room room){
         if(room.getNumberRoom() != null ){
             Optional<Room> tempRoom = this.roomRepository.findById(room.getNumberRoom());
             if(tempRoom.isPresent()){
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Room is rejected in Database.");
+                throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"Room rejected database.");
             }
         }
         this.roomRepository.save(room);
