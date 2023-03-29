@@ -1,20 +1,24 @@
 package com.makaia.Hotel.modules;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+@ApiModel(description ="this model represent the room data")
 @Entity
 @Table(name = "room")
 public class Room implements Serializable {
-
+    @ApiModelProperty(value = "room id", example ="1")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer numberRoom;
+    @ApiModelProperty(value = "room type", example ="basic")
     @Column(name = "roomType")
     private String roomType;
+    @ApiModelProperty(value = "room price", example ="100")
     @Column(name = "price")
     private Double price;
 

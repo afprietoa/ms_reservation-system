@@ -1,25 +1,32 @@
 package com.makaia.Hotel.modules;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+@ApiModel(description ="this model represent the customer data")
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {
-
+    @ApiModelProperty(value = "customer id", example ="1")
     @Id
     private Integer dni;
+    @ApiModelProperty(value = "customer first name", example ="Pepito")
     @Column(name = "firstName", length = 50)
     private String firstName;
+    @ApiModelProperty(value = "customer last name", example ="Perez")
     @Column(name = "lastName", length = 50)
     private String lastName;
+    @ApiModelProperty(value = "customer address", example ="Cl falsa 123")
     @Column(name = "address", length = 100)
     private String address;
+    @ApiModelProperty(value = "customer age", example ="18")
     @Column(name = "age")
     private Integer age;
+    @ApiModelProperty(value = "customer e-mail", example ="1")
     @Column(name = "email")
     private String email;
 
