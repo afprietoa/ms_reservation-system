@@ -83,8 +83,14 @@ public class ReservationService {
     }
 
 
-    public Reservation create(Reservation reservation, int idCustomer){
+    public Reservation create(Reservation reservation, int idCustomer, int idRoom){
         Optional<Customer> customer = this.customerRepository.findById(idCustomer);
+        Optional<Room> room = this.roomRepository.findById(idRoom);
+
+
+            reservation.setCustomer(customer.get());
+            reservation.setRoom(room.get());
+
         List<Customer> customerList = (List<Customer>) this.customerRepository.findAll();
         if(reservation.getReserveCode() != null ){
             Optional<Reservation> tempReservation = this.reservationRepository.findById(reservation.getReserveCode());

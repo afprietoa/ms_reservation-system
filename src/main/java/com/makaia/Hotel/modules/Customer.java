@@ -27,6 +27,8 @@ public class Customer implements Serializable {
     @JsonIgnoreProperties("customer")
     private List<Reservation> reservations;
 
+    public Customer(){}
+
     // TODO: delete constructor
     public Customer(Integer dni, String firstName, String lastName, String address, Integer age, String email) {
         this.dni = dni;

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +28,7 @@ public class Reservation implements Serializable {
     @JsonIgnoreProperties("reservations")
     private Room room;
 
+    public Reservation(){}
     public Reservation(Integer reserveCode, LocalDate reserveDate, Double totalValue, Customer customer, Room room) {
         this.reserveCode = reserveCode;
         this.reserveDate = reserveDate;
