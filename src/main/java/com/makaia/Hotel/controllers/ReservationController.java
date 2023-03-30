@@ -25,8 +25,8 @@ public class ReservationController {
         @ApiResponse( code = 201, message = "created reservation success")
 })
 @ApiOperation(value="reservation", notes= "this create a reservation", response = Reservation.class)
-    @PostMapping("/reservation/customer/{idCustomer}/room/{idRoom}")
-    @ResponseStatus(HttpStatus.CREATED)
+@ResponseStatus(HttpStatus.CREATED)
+@PostMapping("/reservation/customer/{idCustomer}/room/{idRoom}")
     public Reservation register(@ApiParam(value = "reservation object", required = true) @RequestBody Reservation reservation,@ApiParam(value = "customer id", required = true) @PathVariable("idCustomer") int idCustomer,@ApiParam(value = "room id", required = true) @PathVariable("idRoom") int idRoom){
         return reservationService.create(reservation, idCustomer, idRoom);
     }
@@ -35,7 +35,7 @@ public class ReservationController {
             @ApiResponse( code = 200, message = "room type search success")
     })
     @ApiOperation(value="List's room", notes= "this searches by type and date", response = Room.class)
-    @GetMapping("/byType/reservationDate/{date}/reservationType/{type}")
+    @GetMapping("/reservation/byDate/{date}/byType/{type}")
     public List<Room> researchByType(@ApiParam(value = "reservation date", required = true) @PathVariable("date") String date,@ApiParam(value = "room type", required = true) @PathVariable("type") String type){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(date, formatter);
@@ -48,7 +48,7 @@ public class ReservationController {
             @ApiResponse(code = 500, message ="That's an internal error"),
     })
     @ApiOperation(value="List's room", notes= "this searches by date", response = Room.class)
-    @GetMapping("/byType/reservationDate/{date}")
+    @GetMapping("/reservation/byDate/{date}")
     public List<Room> researchByDate(@ApiParam(value = "reservation date", required = true) @PathVariable("date") String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate parsedDate = LocalDate.parse(date, formatter);
