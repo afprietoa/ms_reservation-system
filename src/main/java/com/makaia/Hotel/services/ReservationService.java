@@ -45,22 +45,18 @@ public class ReservationService {
         List<Room> roomList = new ArrayList<>();
 
         if(roomType.equals("basic")){
-            List<Reservation> reservationBasic = reservations.stream()
+            List<Reservation> reservationBasicList = reservations.stream()
                     .filter(reservation -> reservation.getRoom() != null && reservation.getRoom().getRoomType().equals("basic") && reservation.getReserveDate().equals(date))
                     .collect(Collectors.toList());
-            reservationBasic.stream().forEach(reservation -> {
-                Optional<Room> auxRoom = roomRepository.findById(reservation.getRoom().getNumberRoom());
-                roomList.add(auxRoom.get());
-
+            reservationBasicList.forEach(reservation -> {
+                roomList.add(reservation.getRoom());
             });
         }else if (roomType.equals("premium")) {
-            List<Reservation> reservationBasic = reservations.stream()
+            List<Reservation> reservationPremiumList = reservations.stream()
                     .filter(reservation -> reservation.getRoom() != null && reservation.getRoom().getRoomType().equals("premium") && reservation.getReserveDate().equals(date))
                     .collect(Collectors.toList());
-            reservationBasic.stream().forEach(reservation -> {
-                Optional<Room> auxRoom = roomRepository.findById(reservation.getRoom().getNumberRoom());
-                roomList.add(auxRoom.get());
-
+            reservationPremiumList.forEach(reservation -> {
+                roomList.add(reservation.getRoom());
             });
 
         }
@@ -72,13 +68,13 @@ public class ReservationService {
         List<Reservation> reservations = research();
         List<Room> roomList = new ArrayList<>();
 
-            List<Reservation> reservationBasic = reservations.stream()
+            List<Reservation> reservationList = reservations.stream()
                     .filter(reservation -> reservation.getRoom() != null && reservation.getReserveDate().equals(date))
                     .collect(Collectors.toList());
-            reservationBasic.stream().forEach(reservation -> {
-                Optional<Room> auxRoom = roomRepository.findById(reservation.getRoom().getNumberRoom());
-                roomList.add(auxRoom.get());
-            });
+        reservationList.forEach(reservation -> {
+            roomList.add(reservation.getRoom());
+        });
+
         return roomList;
     }
 

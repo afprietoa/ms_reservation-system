@@ -1,5 +1,6 @@
 package com.makaia.Hotel.services;
 
+import com.makaia.Hotel.dto.CustomerDTO;
 import com.makaia.Hotel.exceptions.HandlerResponseException;
 import com.makaia.Hotel.modules.Customer;
 import com.makaia.Hotel.repositories.CustomerRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
@@ -50,5 +52,23 @@ public class CustomerService {
             throw new HandlerResponseException(HttpStatus.INTERNAL_SERVER_ERROR,"Database is empty.");
         }
         return customerList;
+    }
+
+    public List<CustomerDTO> getCustomers() {
+        return researchAll()
+                .stream()
+                .map(customer -> new CustomerDTO(
+                        customer.getDni(),
+                        customer.getFirstName(),
+                        customer.getLastName()))
+                .collect(Collectors.toList());
+    }
+
+    public Optional<CustomerDTO> getCustomer(int dni) {
+        Optional<Customer> customer =researchById(dni);
+        return Optional.of(new CustomerDTO(
+                customer.get().getDni(),
+                customer.get().getFirstName(),
+                customer.get().getLastName()));
     }
 }

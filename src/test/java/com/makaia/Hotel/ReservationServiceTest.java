@@ -23,7 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ReservationServiceTest {
-/*
+
     ReservationRepository reservationRepository;
     CustomerRepository customerRepository;
     RoomRepository roomRepository;
@@ -41,16 +41,20 @@ public class ReservationServiceTest {
     @Test
     public void validateReservation() {
         Customer customer = new Customer(1, "Pepito", "Peréz", "Calle falsa 123", 18, "peto@example.com");
-        Room room = new Room(1, "basic", 100.00);
+        Room room = new Room(34, "basic", 100.00);
 
-        Reservation reservation = new Reservation(1, LocalDate.of(2023, 3, 30), 100.00, customer, room);
+        Reservation reservation = new Reservation(1, LocalDate.of(2024, 3, 31), 100.00, customer, room);
         List<Customer> customerList = new ArrayList<>();
         customerList.add(customer);
 
         when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
         when(customerRepository.findAll()).thenReturn(customerList);
 
-        Reservation reserv = reservationService.create(reservation, 1);
+        when(roomRepository.findById(34)).thenReturn(Optional.of(room));
+
+
+
+        Reservation reserv = reservationService.create(reservation, 1,34);
 
         LocalDate nowDate = LocalDate.now();
 
@@ -108,7 +112,7 @@ public class ReservationServiceTest {
         List<Room> roomList = reservationService.roomsByType(LocalDate.of(2023, 3, 30), "basic");
 
         assertNotNull(roomList);
-        assertTrue(roomList.get(0).equals(room2));
+        assertTrue(roomList.get(0).equals(room1));
     }
 
     @Test
@@ -160,7 +164,7 @@ public class ReservationServiceTest {
 
 
         assertNotNull(roomList);
-        assertTrue(roomList.get(0).equals(room2));
+        assertTrue(roomList.get(0).equals(room1));
     }
 
     @Test
@@ -227,16 +231,24 @@ public class ReservationServiceTest {
 
     @Test
     public void testCreateWithExistingReservation() {
-        Customer customer = new Customer(1,"Brian","Example","Cr 75 Java",25,"java@java.org");
-        Room room = new Room(34,"premium",75.0);
-        Reservation existingReservation = new Reservation(1, LocalDate.now(), 100.0, customer, room);
+        Customer customer = new Customer(1, "Pepito", "Peréz", "Calle falsa 123", 18, "peto@example.com");
+        Room room = new Room(34, "basic", 100.00);
 
-        when(reservationRepository.findById(existingReservation.getReserveCode()))
-                .thenReturn(Optional.of(existingReservation));
+        Reservation reservation = new Reservation(1, LocalDate.of(2024, 3, 31), 100.00, customer, room);
+        List<Customer> customerList = new ArrayList<>();
+        customerList.add(customer);
+
+        when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
+        when(customerRepository.findAll()).thenReturn(customerList);
+
+        when(roomRepository.findById(34)).thenReturn(Optional.of(room));
+
+        when(reservationRepository.findById(reservation.getReserveCode()))
+                .thenReturn(Optional.of(reservation));
 
         HandlerResponseException exception = assertThrows(
                 HandlerResponseException.class,
-                () -> reservationService.create(existingReservation, 1)
+                () -> reservationService.create(reservation, 1,34)
         );
 
         assertAll(
@@ -249,13 +261,21 @@ public class ReservationServiceTest {
 
     @Test
     public void testCreateWithInvalidDate() {
-        Customer customer = new Customer(1, "Brian", "Example", "Cr 75 Java", 25, "java@java.org");
-        Room room = new Room(34, "premium", 75.0);
-        Reservation reservation = new Reservation(2, LocalDate.of(2022, 1, 1), 100.0, customer, room);
+        Customer customer = new Customer(1, "Pepito", "Peréz", "Calle falsa 123", 18, "peto@example.com");
+        Room room = new Room(34, "basic", 100.00);
+
+        Reservation reservation = new Reservation(1, LocalDate.of(2022, 3, 31), 100.00, customer, room);
+        List<Customer> customerList = new ArrayList<>();
+        customerList.add(customer);
+
+        when(customerRepository.findById(1)).thenReturn(Optional.of(customer));
+        when(customerRepository.findAll()).thenReturn(customerList);
+
+        when(roomRepository.findById(34)).thenReturn(Optional.of(room));
 
         HandlerResponseException exception = assertThrows(
                 HandlerResponseException.class,
-                () -> reservationService.create(reservation, 1)
+                () -> reservationService.create(reservation, 1,34)
         );
 
         assertAll(
@@ -263,6 +283,6 @@ public class ReservationServiceTest {
                 () -> assertEquals("Reservation isn't available for " + LocalDate.now(), exception.getReason())
         );
 
-    }*/
+    }
 
 }
