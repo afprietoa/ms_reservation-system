@@ -109,7 +109,7 @@ public class ReservationServiceTest {
         }
 
 
-        List<Room> roomList = reservationService.roomsByType(LocalDate.of(2023, 3, 30), "basic");
+        List<Room> roomList = reservationService.roomsByType("2024-3-30", "basic");
 
         assertNotNull(roomList);
         assertTrue(roomList.get(0).equals(room1));
@@ -160,7 +160,7 @@ public class ReservationServiceTest {
         }
 
 
-        List<Room> roomList = reservationService.roomsByDate(LocalDate.of(2023, 3, 30));
+        List<Room> roomList = reservationService.roomsByDate("2024-4-30");
 
 
         assertNotNull(roomList);
@@ -186,7 +186,7 @@ public class ReservationServiceTest {
         when(reservationRepository.findAll()).thenReturn(reservations);
 
         // Call the service method
-        List<Room> roomList = reservationService.roomsByType(date, "basic");
+        List<Room> roomList = reservationService.roomsByType(date.toString(), "basic");
 
         // Assertions
         assertEquals(2, roomList.size());
@@ -213,7 +213,7 @@ public class ReservationServiceTest {
         when(reservationRepository.findAll()).thenReturn(reservations);
 
         // Call the service method
-        List<Room> roomList = reservationService.roomsByType(date, "premium");
+        List<Room> roomList = reservationService.roomsByType(date.toString(), "premium");
 
         // Assertions
         assertEquals(2, roomList.size());

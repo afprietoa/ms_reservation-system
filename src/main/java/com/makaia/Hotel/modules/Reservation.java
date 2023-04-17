@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 @ApiModel(description ="this model represent the reservation data")
 @Entity

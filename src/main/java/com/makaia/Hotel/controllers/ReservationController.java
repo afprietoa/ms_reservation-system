@@ -22,7 +22,8 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 @ApiResponses(value={
-        @ApiResponse( code = 201, message = "created reservation success")
+        @ApiResponse( code = 201, message = "created reservation success"),
+        @ApiResponse(code = 500, message ="That's an internal error"),
 })
 @ApiOperation(value="reservation", notes= "this create a reservation", response = Reservation.class)
 @ResponseStatus(HttpStatus.CREATED)
@@ -32,26 +33,26 @@ public class ReservationController {
     }
 
     @ApiResponses(value={
-            @ApiResponse( code = 200, message = "room type search success")
+            @ApiResponse(code = 200, message ="Everything is Ok"),
+            @ApiResponse(code = 400, message ="Date format incorrect."),
+            @ApiResponse(code = 404, message ="That's an error in the client service"),
+            @ApiResponse(code = 500, message ="That's an internal error"),
     })
     @ApiOperation(value="List's room", notes= "this searches by type and date", response = Room.class)
     @GetMapping("/reservation/byDate/{date}/byType/{type}")
     public List<Room> researchByType(@ApiParam(value = "reservation date", required = true) @PathVariable("date") String date,@ApiParam(value = "room type", required = true) @PathVariable("type") String type){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate parsedDate = LocalDate.parse(date, formatter);
-        return reservationService.roomsByType(parsedDate, type);
+        return reservationService.roomsByType(date, type);
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message ="Everything is Ok"),
+            @ApiResponse(code = 400, message ="Date format incorrect."),
             @ApiResponse(code = 404, message ="That's an error in the client service"),
             @ApiResponse(code = 500, message ="That's an internal error"),
     })
     @ApiOperation(value="List's room", notes= "this searches by date", response = Room.class)
     @GetMapping("/reservation/byDate/{date}")
     public List<Room> researchByDate(@ApiParam(value = "reservation date", required = true) @PathVariable("date") String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate parsedDate = LocalDate.parse(date, formatter);
-        return reservationService.roomsByDate(parsedDate);
+        return reservationService.roomsByDate(date);
     }
 }
