@@ -59,7 +59,7 @@ public class ReservationService {
             });
         }else if (roomType.equals("premium")) {
             List<Reservation> reservationPremiumList = reservations.stream()
-                    .filter(reservation -> reservation.getRoom() != null && reservation.getRoom().getRoomType().equals("premium") && reservation.getReserveDate().equals(date))
+                    .filter(reservation -> reservation.getRoom() != null && reservation.getRoom().getRoomType().equals("premium") && reservation.getReserveDate().equals(parsedDate))
                     .collect(Collectors.toList());
             reservationPremiumList.forEach(reservation -> {
                 roomList.add(reservation.getRoom());
