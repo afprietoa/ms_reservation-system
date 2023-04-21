@@ -41,7 +41,7 @@ POST Method, request customer ENDPOINT example (http://localhost:8080/api/v1/cus
 
 Request Body
 
-```
+```json
 {
         "dni": 1,
         "firstName": "Pepito",
@@ -53,7 +53,7 @@ Request Body
 
 ```
 
-![image](https://user-images.githubusercontent.com/68924563/233527085-62d613f7-06e1-4451-ae03-5d0209687e70.png)
+
 
 2. It must be register premium or basic type rooms.
 
