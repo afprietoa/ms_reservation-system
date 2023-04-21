@@ -68,12 +68,102 @@ Response Data
 
 ```
 
-2. It must be register premium or basic type rooms.
+2. A specific customer must be recovered by id card number. In addition, it must be listed all customers. 
+
+GET Method, request customer ENDPOINT example (http://localhost:8080/api/v1/customer/1 ) [GET])
+
+Response Data
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "dni": 1,
+        "firstName": "Pepito",
+        "lastName": "Perez"
+}
+```
+
+GET Method, request customer ENDPOINT example (http://localhost:8080/api/v1/customers ) [GET])
+
+Response Data
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "dni": 1,
+        "firstName": "Pepito",
+        "lastName": "Perez"
+},
+{
+        "dni": 2,
+        "firstName": "Carlos",
+        "lastName": "Rodriguez"
+},
+{
+        "dni": 3,
+        "firstName": "Alejandro",
+        "lastName": "soto"
+}
+```
 
 
+4. It must be register premium or basic type rooms.
 
-3. A customer can search available rooms by date and also can search all available rooms that be premium, o that be basic on a specific date.
+POST Method, request room ENDPOINT example (http://localhost:8080/api/v1/room ) [POST]
 
+Request Body
 
+```json
+{
+        "numberRoom": 1,
+        "roomType": "basic",
+        "price": 100.00
+}
 
-4. A customer can reserve a room for a specific date, in this ENDPOINT it is validated that the customer is previously registered in the database and the date can't be null or the date is earlier than today.
+```
+
+Response Data
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "numberRoom": 1,
+        "roomType": "basic",
+        "price": 100.00
+}
+
+```
+
+3. A customer can reserve a room for a specific date, in this ENDPOINT it is validated that the customer is previously registered in the database and the date can't be null or the date is earlier than today.
+
+POST Method, request room ENDPOINT example (http://localhost:8080/api/v1/reservation/customer/1/room/1 ) [POST]
+
+Request Body
+
+```json
+{
+        "reserveDate": "2023-04-21",
+        "totalValue": 100.00,
+        "customer": null,
+        "room": null
+
+}
+
+```
+
+Response Data
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "reserveCode": 1;
+        "reserveDate": "2023-04-21",
+        "totalValue": 100.00,
+        "customer": {
+                 "dni": 1,
+                "firstName": "Pepito",
+                "lastName": "Perez",
+                "address": "calle 123",
+                "age": 18,
+                "email": "pepito@gmail.com"
+        },
+        "room": { "numberRoom": 1, "roomType": "basic", "price": 100.00}
+}
+
+5. A customer can search available rooms by date and also can search all available rooms that be premium, o that be basic on a specific date.
