@@ -53,7 +53,20 @@ Request Body
 
 ```
 
+Response Data
 
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "dni": 1,
+        "firstName": "Pepito",
+        "lastName": "Perez",
+        "address": "calle 123",
+        "age": 18,
+        "email": "pepito@gmail.com",
+        "reservations": null
+}
+
+```
 
 2. It must be register premium or basic type rooms.
 
