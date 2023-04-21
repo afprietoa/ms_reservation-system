@@ -37,7 +37,7 @@ REST API allows performing the next functionalities
 
 1. A customer can register in the hotel database, in this ENDPOINT it is validated that the id card number is an integer, and the first and last name contain data, and these can´t be null.
 
-POST Method, request customer ENDPOINT example (http://localhost:8080/api/v1/customer ) [POST]
+Customer register, request customer ENDPOINT example (http://localhost:8080/api/v1/customer ) [POST]
 
 Request Body
 
@@ -70,7 +70,7 @@ Response Data
 
 2. A specific customer must be recovered by id card number. In addition, it must be listed all customers. 
 
-GET Method, request customer ENDPOINT example (http://localhost:8080/api/v1/customer/1 ) [GET])
+A customer with id card number 1, request customer ENDPOINT example (http://localhost:8080/api/v1/customer/1 ) [GET]
 
 Response Data
 
@@ -82,7 +82,7 @@ Response Data
 }
 ```
 
-GET Method, request customer ENDPOINT example (http://localhost:8080/api/v1/customers ) [GET])
+All customers, request customer ENDPOINT example (http://localhost:8080/api/v1/customers ) [GET]
 
 Response Data
 
@@ -107,7 +107,7 @@ Response Data
 
 4. It must be register premium or basic type rooms.
 
-POST Method, request room ENDPOINT example (http://localhost:8080/api/v1/room ) [POST]
+Basic room register, request room ENDPOINT example (http://localhost:8080/api/v1/room ) [POST]
 
 Request Body
 
@@ -133,7 +133,7 @@ Response Data
 
 3. A customer can reserve a room for a specific date, in this ENDPOINT it is validated that the customer is previously registered in the database and the date can't be null or the date is earlier than today.
 
-POST Method, request room ENDPOINT example (http://localhost:8080/api/v1/reservation/customer/1/room/1 ) [POST]
+Reservation register, request reservation ENDPOINT example (http://localhost:8080/api/v1/reservation/customer/1/room/1 ) [POST]
 
 Request Body
 
@@ -165,5 +165,55 @@ Response Data
         },
         "room": { "numberRoom": 1, "roomType": "basic", "price": 100.00}
 }
-
+```
 5. A customer can search available rooms by date and also can search all available rooms that be premium, o that be basic on a specific date.
+
+Rooms with reserve date of 2023-04-21, request reservation ENDPOINT example (http://localhost:8080/api/v1/reservation/byDate/2023-04-21 ) [GET]
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "reserveCode": 1;
+        "reserveDate": "2023-04-21",
+        "totalValue": 100.00,
+        "customer": {
+                 "dni": 1,
+                "firstName": "Pepito",
+                "lastName": "Perez",
+                "address": "calle 123",
+                "age": 18,
+                "email": "pepito@gmail.com"
+        },
+        "room": { "numberRoom": 1, "roomType": "basic", "price": 100.00}
+},
+{
+        "reserveCode": 2;
+        "reserveDate": "2023-04-21",
+        "totalValue": 200.00,
+        "customer": {
+                 "dni": 1,
+                "firstName": "Carlos",
+                "lastName": "Rodri474",
+                "age": 21,
+                "email": "carlitos@gmail.com"
+        },
+        "room": { "numberRoom": 2, "roomType": "premium", "price": 200.00}
+}
+```
+Rooms with reserve date of 2023-04-21 that are basic, , request reservation ENDPOINT example  (http://localhost:8080/api/v1/reservation/byDate/2023-04-21/byType/basic  ) GET
+
+```java {.highlight .highlight-source-java .bg-black}
+{
+        "reserveCode": 1;
+        "reserveDate": "2023-04-21",
+        "totalValue": 100.00,
+        "customer": {
+                 "dni": 1,
+                "firstName": "Pepito",
+                "lastName": "Perez",
+                "address": "calle 123",
+                "age": 18,
+                "email": "pepito@gmail.com"
+        },
+        "room": { "numberRoom": 1, "roomType": "basic", "price": 100.00}
+}
+```
