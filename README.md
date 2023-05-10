@@ -217,3 +217,8 @@ Rooms with reserve date of 2023-04-21 that are basic, , request reservation ENDP
         "room": { "numberRoom": 1, "roomType": "basic", "price": 100.00}
 }
 ```
+# Class Diagram
+
+![ClassDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/36a924dd-d174-4fe4-bc7c-0062c4390fcb)
+
+
