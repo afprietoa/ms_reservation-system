@@ -221,4 +221,10 @@ Rooms with reserve date of 2023-04-21 that are basic, , request reservation ENDP
 
 ![ClassDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/36a924dd-d174-4fe4-bc7c-0062c4390fcb)
 
+# ER Model
+
+![ERDDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/6b4c517c-02db-43e7-9196-83fa760359a0)
+
+
+
 
