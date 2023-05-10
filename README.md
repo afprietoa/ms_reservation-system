@@ -43,9 +43,9 @@ A customer is defined by:
 
 # Ms Design
 
-![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/1ae34cbe-e65a-4001-9153-c37f0e75cb06)
+![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/0a4e8261-4519-4f2c-92d4-f1689eb809b7)
 
-![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/b3bc53fd-e6c8-45e9-bae5-c301151dc5eb)
+![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/6e526803-85ae-454b-91e5-b4df8aa9cadf)
 
 
 REST API allows performing the next functionalities
