@@ -35,11 +35,17 @@ A customer is defined by:
 
 # Class Diagram
 
-![ClassDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/36a924dd-d174-4fe4-bc7c-0062c4390fcb)
+![ClassDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/f7c62386-faed-40c2-b5b5-8e2bbe8c1b14)
 
 # ER Model
 
 ![ERDDiagram1](https://github.com/afprietoa/ms_reservation-system/assets/68924563/65c25ce4-f0b3-40c8-9b73-b3929e175e57)
+
+# Ms Design
+
+![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/1ae34cbe-e65a-4001-9153-c37f0e75cb06)
+
+![image](https://github.com/afprietoa/ms_reservation-system/assets/68924563/b3bc53fd-e6c8-45e9-bae5-c301151dc5eb)
 
 
 REST API allows performing the next functionalities
